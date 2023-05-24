@@ -1,3 +1,5 @@
+#include "main.h"
+
 void push(char *argument);
 void pall(void);
 
