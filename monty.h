@@ -1,14 +1,13 @@
-#ifndef _MONTY_H_
-#define _MONTY_H_
+#ifndef MONTY_H
+#define MONTY_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -17,7 +16,7 @@
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct stack_s
 {
@@ -32,7 +31,7 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct instruction_s
 {
@@ -40,59 +39,25 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct global_s - global variables
- * @token: operand
- * @num: value to store in stack
- * @code: instruction
- * @file: pointer to monty file descriptor
- * @content: line content
- * @flag: change stack <-> queue
- * Description: carries values through the program
- */
-typedef struct global_s
-{
-	char *code;
-	char *token;
-	FILE *file;
-	char *content;
-	int flag;
-	int num;
-}  global_t;
+void push(stack_t **, unsigned int);
+void pop(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
+void pint(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
+void nop(stack_t **, unsigned int);
+void pall(stack_t **, unsigned int);
+void sub(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
+void division(stack_t **, unsigned int);
+void mul(stack_t **, unsigned int);
+void mod(stack_t **, unsigned int);
+void pchar(stack_t **, unsigned int);
+void pstr(stack_t **, unsigned int);
 
-extern global_t global;
+int _isdigit(int);
+void is_opcode(char *, stack_t **, unsigned int);
+char **parse(char *);
+void freestack(stack_t **);
+void check_push(stack_t **, char **, unsigned int);
 
-/* line_mod */
-char add_null(char *line);
-int line_len(char *line);
-
-/* free_stack */
-void free_stack(stack_t **stack);
-
-/*execute_op*/
-void (*funct(char *token))(stack_t **stack, unsigned int line_number);
-
-/*tasks*/
-void s_push(stack_t **stack, unsigned int line_number);
-void s_pall(stack_t **stack, unsigned int line_number);
-void s_pint(stack_t **stack, unsigned int line_number);
-void s_pop(stack_t **stack, unsigned int line_number);
-void s_swap(stack_t **stack, unsigned int line_number);
-void s_add(stack_t **stack, unsigned int line_number);
-void s_nop(stack_t **stack, unsigned int line_number);
-void s_sub(stack_t **stack, unsigned int line_number);
-void s_error(stack_t **stack, unsigned int line_number);
-void s_div(stack_t **stack, unsigned int line_number);
-void s_mul(stack_t **stack, unsigned int line_number);
-void s_mod(stack_t **stack, unsigned int line_number);
-void s_pchar(stack_t **stack, unsigned int line_number);
-void s_pstr(stack_t **stack, unsigned int line_number);
-void s_rotl(stack_t **stack, unsigned int line_number);
-void s_rotr(stack_t **stack, unsigned int line_number);
-void s_queue(stack_t **stack, unsigned int line_number);
-void s_stack(stack_t **stack, unsigned int line_number);
-/*verify*/
-void _verify(stack_t **stack, unsigned int line_number);
-int check_int(char *num);
-
-#endif /*monty.h*/
+#endif
