@@ -1,11 +1,5 @@
 #include "monty.h"
 
-/**
- * push - Inizialice a node in the begin of the list.
- * @stack: Head of the double linked list.
- * @line_number: Line of execution of command.
- * Return: Nothing, couse the struct specifications.
- */
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node;
@@ -34,12 +28,6 @@ void push(stack_t **stack, unsigned int line_number)
 	*stack = new_node;
 }
 
-/**
- * nop - Do nothing.
- * @stack: Head of the double linked list.
- * @line_number: Line of execution of command.
- * Return: Nothing, couse the struct specifications.
- */
 
 void nop(stack_t **stack, unsigned int line_number)
 {
@@ -47,12 +35,6 @@ void nop(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 }
 
-/**
- * _rotl - Pass the top to the bottom of the linked list.
- * @stack: Head of the double linked list.
- * @line_number: Line of execution of command.
- * Return: Nothing, couse the struct specifications.
- */
 void _rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp1;
@@ -76,12 +58,7 @@ void _rotl(stack_t **stack, unsigned int line_number)
 	tmp2->prev = tmp1;
 }
 
-/**
- * _rotr - Pass the top to the bottom of the linked list.
- * @stack: Head of the double linked list.
- * @line_number: Line of execution of command.
- * Return: Nothing, couse the struct specifications.
- */
+
 void _rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp, *final, *b_final;
