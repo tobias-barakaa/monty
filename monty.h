@@ -49,6 +49,27 @@ typedef struct var_global
 } global_t;
 extern global_t header;
 
+
+
+
+struct bookStore
+
+{ 
+
+   // structure definition
+
+   char storeName
+
+   int totalBooks;
+
+   char storeLicense[20];
+
+} storeA, storeB;
+
+
+
+
+
 /* Main functions */
 void start_stack(stack_t **stack);
 void function_select(stack_t **stack, unsigned int line_number, char *command);
@@ -71,6 +92,8 @@ void add(stack_t **stack, unsigned int line_number);
 void _rotl(stack_t **stack, unsigned int line_number);
 void _rotr(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
+
+
 
 void free_all(void);
 
