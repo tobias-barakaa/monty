@@ -1,11 +1,5 @@
 #include "monty.h"
 
-/**
- * manage_error - mange error for push function.
- * @value: The value for evaluate for push.
- * @line_number: Execution line.
- * Return: The value in a integer.
- */
 int manage_error(char *value, unsigned int line_number)
 {
 	int j;
