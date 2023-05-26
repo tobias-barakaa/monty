@@ -50,26 +50,6 @@ typedef struct var_global
 extern global_t header;
 
 
-
-
-struct bookStore
-
-{ 
-
-   // structure definition
-
-   char storeName
-
-   int totalBooks;
-
-   char storeLicense[20];
-
-} storeA, storeB;
-
-
-
-
-
 /* Main functions */
 void start_stack(stack_t **stack);
 void function_select(stack_t **stack, unsigned int line_number, char *command);
