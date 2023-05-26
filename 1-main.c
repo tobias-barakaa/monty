@@ -1,12 +1,12 @@
 #include "monty.h"
 /**
- * function_select - func to use
- * @stack: Head param
- * @line_number:line
- * @str: The str .
- * Return: 0.
+ * function_select - select the fucntion for use.
+ * @stack: Head of the double linked list.
+ * @line_number: Line of execution of command.
+ * @command: The command passed.
+ * Return: Nothing.
  */
-void function_select(stack_t **stack, unsigned int line_number, char *str)
+void function_select(stack_t **stack, unsigned int line_number, char *command)
 {
         instruction_t functions[] = {
                 {"pint", pint}, {"pall", pall}, {"push", push},
@@ -16,58 +16,60 @@ void function_select(stack_t **stack, unsigned int line_number, char *str)
                 {"pstr", pstr}, {"rotl", _rotl}, {"rotr", _rotr},
                 {NULL, NULL}
         };
-        int loop;
+        int j;
 
-        if (str[0] == '#')
-                (return);
+        if (command[0] == '#')
+                return;
 
-        for (loop = 0; functions[loop].opcode != NULL; loop++)
+        for (j = 0; functions[j].opcode != NULL; j++)
         {
-                if (strcmp(functions[loop].opcode, str) == 0)
+                if (strcmp(functions[j].opcode, command) == 0)
                 {
-                        functions[loop].f(stack, line_number);
+                        functions[j].f(stack, line_number);
                         return;
                 }
         }
-        fprintf(stderr, "L%u: unknown instruction %s\n", line_number, str);
+        fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
         exit(EXIT_FAILURE);
 }
 
 /**
- * find_file - function to execute
- * @stack: stack
- * @source: source
- * Return: (0).
+ * find_file - Mange of the path for know the function for use.
+ * @stack: Head of the double linked list.
+ * @path: The file for execute him commands.
+ * Return: Nothing.
  */
-void find_file(char *source, stack_t **stack)
+void find_file(char *path, stack_t **stack)
 {
-        FILE *open_file;
-        char *argument;
+        FILE *file;
+        char *command;
         size_t n;
         unsigned int line_number = 1;
-        char *data = NULL;
+        char *buffer = NULL;
 
-        if (!source)
+        if (!path)
         {
-                fprintf(stderr, "Error: Can't open open_file %s\n", source);
+                fprintf(stderr, "Error: Can't open file %s\n", path);
                 exit(EXIT_FAILURE);
         }
 
-        open_file = fopen(source, "r");
-        if (!open_file)
+        file = fopen(path, "r");
+        if (!file)
         {
-                fprintf(stderr, "Error: Can't open open_file %s\n", source);
+                fprintf(stderr, "Error: Can't open file %s\n", path);
                 exit(EXIT_FAILURE);
         }
-        header.open_file = open_file;
-        while (getline(&data, &n, open_file) != -1)
+        header.file = file;
+        while (getline(&buffer, &n, file) != -1)
         {
-                header.data = data;
-                argument = strtok(data, " \n\t\r");
-                if (argument)
-                        function_select(stack, line_number, argument);
+                header.buffer = buffer;
+                command = strtok(buffer, " \n\t\r");
+                if (command)
+                        function_select(stack, line_number, command);
                 line_number++;
         }
         atexit(free_all);
+        /* free(buffer); */
+        /* fclose(file); */
         exit(EXIT_SUCCESS);
 }
