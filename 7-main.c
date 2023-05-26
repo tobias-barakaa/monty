@@ -2,7 +2,7 @@
 
 int manage_error(char *value, unsigned int line_number)
 {
-	int j;
+	int iterate;
 
 	if (!value)
 	{
@@ -10,9 +10,9 @@ int manage_error(char *value, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	for (j = 0; value[j] != '\0'; j++)
+	for (iterate = 0; value[iterate] != '\0'; iterate++)
 	{
-		if (value[j] < 48 || value[j] > 57)
+		if (value[iterate] < 48 || value[iterate] > 57)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
