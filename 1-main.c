@@ -1,14 +1,6 @@
 #include "monty.h"
 
-
-
-/**
- * find_file - Mange of the path for know the function for use.
- * @stack: Head of the double linked list.
- * @path: The file for execute him commands.
- * Return: Nothing.
- */
-void find_file(char *path, stack_t **stack)
+void find_file(char *source, stack_t **stack)
 {
         FILE *file;
         char *command;
@@ -16,16 +8,16 @@ void find_file(char *path, stack_t **stack)
         unsigned int line_number = 1;
         char *buffer = NULL;
 
-        if (!path)
+        if (!source)
         {
-                fprintf(stderr, "Error: Can't open file %s\n", path);
+                fprintf(stderr, "Error: Can't open file %s\n", source);
                 exit(EXIT_FAILURE);
         }
 
-        file = fopen(path, "r");
+        file = fopen(source, "r");
         if (!file)
         {
-                fprintf(stderr, "Error: Can't open file %s\n", path);
+                fprintf(stderr, "Error: Can't open file %s\n", source);
                 exit(EXIT_FAILURE);
         }
         header.file = file;
@@ -38,7 +30,5 @@ void find_file(char *path, stack_t **stack)
                 line_number++;
         }
         atexit(free_all);
-        /* free(buffer); */
-        /* fclose(file); */
         exit(EXIT_SUCCESS);
 }
