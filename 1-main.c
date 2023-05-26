@@ -1,37 +1,6 @@
 #include "monty.h"
-/**
- * function_select - select the fucntion for use.
- * @stack: Head of the double linked list.
- * @line_number: Line of execution of command.
- * @command: The command passed.
- * Return: Nothing.
- */
-void function_select(stack_t **stack, unsigned int line_number, char *command)
-{
-        instruction_t functions[] = {
-                {"pint", pint}, {"pall", pall}, {"push", push},
-                {"pop", pop}, {"swap", swap}, {"add", add},
-                {"nop", nop}, {"sub", sub}, {"div", _div},
-                {"mul", _mul}, {"mod", _mod}, {"pchar", pchar},
-                {"pstr", pstr}, {"rotl", _rotl}, {"rotr", _rotr},
-                {NULL, NULL}
-        };
-        int j;
 
-        if (command[0] == '#')
-                return;
 
-        for (j = 0; functions[j].opcode != NULL; j++)
-        {
-                if (strcmp(functions[j].opcode, command) == 0)
-                {
-                        functions[j].f(stack, line_number);
-                        return;
-                }
-        }
-        fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
-        exit(EXIT_FAILURE);
-}
 
 /**
  * find_file - Mange of the path for know the function for use.
